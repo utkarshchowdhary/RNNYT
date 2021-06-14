@@ -1,0 +1,12 @@
+{
+  "name": "RNNYT",
+  "displayName": "RNNYT",
+  "expo": {
+    "name": "RNNYT",
+    "slug": "RNNYT",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}

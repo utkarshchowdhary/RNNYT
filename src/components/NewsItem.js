@@ -22,7 +22,7 @@ const NewsItem = ({
   return (
     <TouchableOpacity style={style} onPress={onModalOpen}>
       <Thumbnail
-        url={imageUrl}
+        imageUrl={imageUrl}
         titleText={title}
         accentColor={accentColor}
         style={styles().thumbnail}
@@ -43,7 +43,7 @@ NewsItem.propTypes = {
   style: PropTypes.any,
   title: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
-  imageUrl: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string,
   date: PropTypes.instanceOf(Date).isRequired,
   author: PropTypes.string.isRequired,
   location: PropTypes.string,

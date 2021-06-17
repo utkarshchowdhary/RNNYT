@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import { StyleSheet, ImageBackground, View } from "react-native";
 import Title from "./Title";
 
-const Thumbnail = ({ url, titleText, accentColor, style }) => (
+const Thumbnail = ({ imageUrl, titleText, accentColor, style }) => (
   <View style={[styles({ accentColor }).container, style]}>
-    {url.length > 0 ? (
+    {imageUrl ? (
       <ImageBackground
-        style={styles({ accentColor }).image}
+        style={styles().image}
         source={{
-          uri: url,
+          uri: imageUrl,
         }}
       >
         <Title style={styles().title}>{titleText}</Title>
@@ -24,7 +24,7 @@ const Thumbnail = ({ url, titleText, accentColor, style }) => (
 
 Thumbnail.propTypes = {
   style: PropTypes.any,
-  url: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string,
   titleText: PropTypes.string.isRequired,
   accentColor: PropTypes.string.isRequired,
 };

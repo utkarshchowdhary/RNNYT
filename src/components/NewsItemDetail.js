@@ -35,12 +35,14 @@ const NewsItemDetail = ({
         <SmallText style={styles.buttonText}>OPEN IN BROWSER</SmallText>
       </TouchableOpacity>
     </View>
-    <ImageBackground style={styles.image} source={{ uri: imageUrl }}>
-      {location ? (
-        <SmallText style={styles.location}>{location}</SmallText>
-      ) : null}
-      <SmallText style={styles.date}>{date.toLocaleDateString()}</SmallText>
-    </ImageBackground>
+    {imageUrl ? (
+      <ImageBackground style={styles.image} source={{ uri: imageUrl }}>
+        {location ? (
+          <SmallText style={styles.location}>{location}</SmallText>
+        ) : null}
+        <SmallText style={styles.date}>{date.toLocaleDateString()}</SmallText>
+      </ImageBackground>
+    ) : null}
     <Title style={styles.title}>{title}</Title>
     <View style={styles.byline}>
       <SmallText style={styles.bylineText}>{category}</SmallText>
@@ -55,7 +57,7 @@ const NewsItemDetail = ({
 NewsItemDetail.propTypes = {
   title: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
-  imageUrl: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string,
   description: PropTypes.string.isRequired,
   date: PropTypes.instanceOf(Date).isRequired,
   author: PropTypes.string.isRequired,

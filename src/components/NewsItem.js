@@ -2,25 +2,25 @@ import React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import Byline from "./Byline";
-import BaseText from "./BaseText";
 import Thumbnail from "./Thumbnail";
 import * as globalStyles from "../styles/global";
 
 const NewsItem = ({
-  index,
   style,
-  imageUrl,
   title,
-  author,
+  category,
+  imageUrl,
   date,
+  author,
   location,
-  description,
+  index,
+  onModalOpen,
 }) => {
   const accentColor =
     globalStyles.ACCENT_COLORS[index % globalStyles.ACCENT_COLORS.length];
 
   return (
-    <TouchableOpacity style={style}>
+    <TouchableOpacity style={style} onPress={onModalOpen}>
       <Thumbnail
         url={imageUrl}
         titleText={title}
@@ -28,8 +28,12 @@ const NewsItem = ({
         style={styles().thumbnail}
       />
       <View style={styles({ accentColor }).content}>
-        <Byline author={author} date={date} location={location} />
-        <BaseText>{description}</BaseText>
+        <Byline
+          category={category}
+          author={author}
+          date={date}
+          location={location}
+        />
       </View>
     </TouchableOpacity>
   );
@@ -37,14 +41,14 @@ const NewsItem = ({
 
 NewsItem.propTypes = {
   style: PropTypes.any,
-  imageUrl: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string.isRequired,
   date: PropTypes.instanceOf(Date).isRequired,
   author: PropTypes.string.isRequired,
   location: PropTypes.string,
   index: PropTypes.number.isRequired,
-  onPress: PropTypes.func.isRequired,
+  onModalOpen: PropTypes.func.isRequired,
 };
 
 const styles = ({ accentColor } = {}) =>

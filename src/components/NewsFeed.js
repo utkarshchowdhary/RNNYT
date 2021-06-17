@@ -1,10 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, SafeAreaView, View, FlatList } from "react-native";
+import { StyleSheet, SafeAreaView, View, FlatList, Modal } from "react-native";
 import NewsItem from "./NewsItem";
+import NewsItemDetail from "./NewsItemDetail";
 import * as globalStyles from "../styles/global";
 
 const NewsFeed = ({ news }) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [newsItem, setNewsItem] = useState(null);
+
+  const handleModalOpen = (item) => {
+    setNewsItem(item);
+    setModalVisible(true);
+  };
+
+  const handleModalClose = () => {
+    setModalVisible(false);
+    setNewsItem(null);
+  };
+
+  const renderModal = () => (
+    <>
+      {modalVisible ? (
+        <Modal
+          animationType="slide"
+          visible
+          statusBarTranslucent={true}
+          onRequestClose={handleModalClose}
+        >
+          <SafeAreaView
+            style={[
+              globalStyles.COMMON_STYLES.pageContainer,
+              styles.modalContainer,
+            ]}
+          >
+            <NewsItemDetail onModalClose={handleModalClose} {...newsItem} />
+          </SafeAreaView>
+        </Modal>
+      ) : null}
+    </>
+  );
+
   return (
     <SafeAreaView style={globalStyles.COMMON_STYLES.pageContainer}>
       <View style={globalStyles.COMMON_STYLES.pageSubContainer}>
@@ -13,13 +49,14 @@ const NewsFeed = ({ news }) => {
           renderItem={({ item, index }) => (
             <NewsItem
               style={styles.newsItem}
-              onPress={() => null}
+              onModalOpen={() => handleModalOpen(item)}
               index={index}
               {...item}
             />
           )}
           keyExtractor={(item) => item.id}
         />
+        {renderModal()}
       </View>
     </SafeAreaView>
   );
@@ -37,6 +74,7 @@ NewsFeed.defaultProps = {
       id: "yvZWm-3-A2jrFsK1GEZHN",
       title:
         "Channel Kristin Cavallari’s Cabo Style With This Ultra-Similar Sun Hat",
+      category: "CELEB STYLE",
       imageUrl:
         "https://www.usmagazine.com/wp-content/uploads/2021/06/kristin-cavallari-sun-hat.jpg",
       description:
@@ -50,6 +88,7 @@ NewsFeed.defaultProps = {
       id: "xjED84TaQEtlg6KE6_E_V",
       title:
         "Dread Wearing Bathing Suits? This ‘Miracle’ One-Piece Is a Dream for Hourglass Shapes",
+      category: "SWIM STYLE",
       imageUrl:
         "https://i0.wp.com/www.usmagazine.com/wp-content/uploads/2021/06/miraclesuit-swimsuit.jpg",
       description:
@@ -63,6 +102,7 @@ NewsFeed.defaultProps = {
       id: "ecqOSFxvzjjaJ61XbrdJx",
       title:
         "Emily Hampshire Reflects on Investing in ‘Therapy’ After Heartbreak, Finding a Relationship With Herself",
+      category: "EXCLUSIVE",
       imageUrl:
         "https://www.usmagazine.com/wp-content/uploads/2021/06/Emily-Hampshire-Talks-Investing-Therapy-After-Heartbreak-Self-Love-001.jpg",
       description:
@@ -76,6 +116,7 @@ NewsFeed.defaultProps = {
       id: "XuTGnspslBN2BsUQifw1-",
       title:
         "Pregnant Halsey’s Baby Bump Album Ahead of 1st Child’s Arrival: Photos",
+      category: "PREGNANCIES",
       imageUrl:
         "https://www.usmagazine.com/wp-content/uploads/2021/02/Pregnant-Halsey-Shares-Baby-Bump-Pics-Ahead-of-1st-Childs-Arrival-3.jpg",
       description:
@@ -89,6 +130,7 @@ NewsFeed.defaultProps = {
       id: "ta1o8CFh2zwWR3sYA2ll7",
       title:
         "‘Here for the Right Reasons’: Tayshia and Kaitlyn React to How Katie Handles ‘Bachelorette’ Drama",
+      category: "EXCLUSIVE",
       imageUrl:
         "https://www.usmagazine.com/wp-content/uploads/2021/06/Here-Right-Reasons-Tayshia-Kaitlyn-Katie-Handling-Drama-001.jpg",
       description:
@@ -104,5 +146,8 @@ NewsFeed.defaultProps = {
 const styles = StyleSheet.create({
   newsItem: {
     marginBottom: 20,
+  },
+  modalContainer: {
+    backgroundColor: globalStyles.BG_COLOR_LIGHT,
   },
 });

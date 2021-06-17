@@ -4,17 +4,16 @@ import { StyleSheet, View } from "react-native";
 import SmallText from "./SmallText";
 import * as globalStyles from "../styles/global";
 
-const Byline = ({ date, author, location }) => (
+const Byline = ({ category, date, author, location }) => (
   <>
     <View style={styles.row}>
       <SmallText>{date.toLocaleDateString()}</SmallText>
-      <SmallText>{author}</SmallText>
+      <SmallText>By {author}</SmallText>
     </View>
-    {location ? (
-      <View style={styles.row}>
-        <SmallText style={styles.location}>{location}</SmallText>
-      </View>
-    ) : null}
+    <View style={styles.row}>
+      {location ? <SmallText style={styles.mute}>{location}</SmallText> : null}
+      <SmallText style={styles.mute}>{category}</SmallText>
+    </View>
   </>
 );
 
@@ -30,7 +29,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 5,
   },
-  location: {
+  mute: {
     color: globalStyles.MUTED_COLOR,
   },
 });

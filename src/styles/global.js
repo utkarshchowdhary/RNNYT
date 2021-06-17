@@ -1,5 +1,6 @@
 import { StyleSheet, StatusBar } from "react-native";
 
+export const DIM_PINK = "#ef798a";
 export const BG_COLOR = "#a3b18a";
 export const BG_COLOR_LIGHT = "#fef9ef";
 export const SHADOW_COLOR = "#a3a380";
@@ -16,8 +17,6 @@ export const ACCENT_COLORS = [
   "#70a9a1",
   "#84a59d",
 ];
-
-export const DIM_PINK = "#ef798a";
 
 export const COMMON_STYLES = StyleSheet.create({
   pageContainer: {

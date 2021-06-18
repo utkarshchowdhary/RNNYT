@@ -16,7 +16,7 @@ Title.propTypes = {
 const styles = StyleSheet.create({
   title: {
     fontSize: 18,
-    color: globalStyles.HEADER_TEXT_COLOR,
+    color: globalStyles.TEXT_COLOR,
     backgroundColor: `${globalStyles.BG_COLOR}80`,
   },
 });

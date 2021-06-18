@@ -42,11 +42,20 @@ const NewsItemDetail = ({
         ) : null}
         <SmallText style={styles.date}>{date.toLocaleDateString()}</SmallText>
       </ImageBackground>
-    ) : null}
+    ) : (
+      <View style={styles.row}>
+        {location ? (
+          <SmallText style={styles.rowItem}>{location}</SmallText>
+        ) : null}
+        <SmallText style={styles.rowItem}>
+          {date.toLocaleDateString()}
+        </SmallText>
+      </View>
+    )}
     <Title style={styles.title}>{title}</Title>
-    <View style={styles.byline}>
-      <SmallText style={styles.bylineText}>{category}</SmallText>
-      <SmallText style={styles.bylineText}>By {author}</SmallText>
+    <View style={styles.row}>
+      <SmallText style={styles.rowItem}>{category}</SmallText>
+      <SmallText style={styles.rowItem}>By {author}</SmallText>
     </View>
     <View style={styles.descriptionContainer}>
       <SmallText style={styles.description}>{description}</SmallText>
@@ -111,12 +120,13 @@ const styles = StyleSheet.create({
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 1,
   },
-  byline: {
+  row: {
     padding: 5,
+    backgroundColor: `${globalStyles.DIM_PINK}33`,
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  bylineText: {
+  rowItem: {
     color: globalStyles.DIM_PINK,
     fontSize: 14,
     fontWeight: "bold",

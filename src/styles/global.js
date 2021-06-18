@@ -26,7 +26,7 @@ export const COMMON_STYLES = StyleSheet.create({
   },
   pageSubContainer: {
     flex: 1,
-    padding: 10,
+    padding: 12,
   },
   text: {
     color: TEXT_COLOR,
